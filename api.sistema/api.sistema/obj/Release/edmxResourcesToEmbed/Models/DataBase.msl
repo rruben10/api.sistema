@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="sistemaModelStoreContainer" CdmEntityContainer="sistemaEntities">
+    <EntitySetMapping Name="clientes">
+      <EntityTypeMapping TypeName="sistemaModel.clientes">
+        <MappingFragment StoreEntitySet="clientes">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="apellidoPaterno" ColumnName="apellidoPaterno" />
+          <ScalarProperty Name="apellidoMaterno" ColumnName="apellidoMaterno" />
+          <ScalarProperty Name="RFC" ColumnName="RFC" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="configuracion">
+      <EntityTypeMapping TypeName="sistemaModel.configuracion">
+        <MappingFragment StoreEntitySet="configuracion">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="tasa" ColumnName="tasa" />
+          <ScalarProperty Name="enganche" ColumnName="enganche" />
+          <ScalarProperty Name="plazo" ColumnName="plazo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="productos">
+      <EntityTypeMapping TypeName="sistemaModel.productos">
+        <MappingFragment StoreEntitySet="productos">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="modelo" ColumnName="modelo" />
+          <ScalarProperty Name="precio" ColumnName="precio" />
+          <ScalarProperty Name="existencia" ColumnName="existencia" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ventas">
+      <EntityTypeMapping TypeName="sistemaModel.ventas">
+        <MappingFragment StoreEntitySet="ventas">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="cliente" ColumnName="cliente" />
+          <ScalarProperty Name="producto" ColumnName="producto" />
+          <ScalarProperty Name="enganche" ColumnName="enganche" />
+          <ScalarProperty Name="bonificacionEnganche" ColumnName="bonificacionEnganche" />
+          <ScalarProperty Name="total" ColumnName="total" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

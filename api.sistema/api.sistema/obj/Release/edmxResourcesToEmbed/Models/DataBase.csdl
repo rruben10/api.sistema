@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="sistemaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="clientes">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="apellidoPaterno" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="apellidoMaterno" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="RFC" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="ventas" Relationship="Self.ventas_ibfk_1" FromRole="clientes" ToRole="ventas" />
+  </EntityType>
+  <EntityType Name="configuracion">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tasa" Type="Single" Nullable="false" />
+    <Property Name="enganche" Type="Single" Nullable="false" />
+    <Property Name="plazo" Type="Int16" Nullable="false" />
+  </EntityType>
+  <EntityType Name="productos">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="modelo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="precio" Type="Int32" Nullable="false" />
+    <Property Name="existencia" Type="Int16" Nullable="false" />
+    <NavigationProperty Name="ventas" Relationship="Self.ventas_ibfk_2" FromRole="productos" ToRole="ventas" />
+  </EntityType>
+  <EntityType Name="ventas">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cliente" Type="Int64" />
+    <Property Name="producto" Type="Int64" />
+    <Property Name="enganche" Type="Int32" Nullable="false" />
+    <Property Name="bonificacionEnganche" Type="Int32" Nullable="false" />
+    <Property Name="total" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="clientes" Relationship="Self.ventas_ibfk_1" FromRole="ventas" ToRole="clientes" />
+    <NavigationProperty Name="productos" Relationship="Self.ventas_ibfk_2" FromRole="ventas" ToRole="productos" />
+  </EntityType>
+  <Association Name="ventas_ibfk_1">
+    <End Role="clientes" Type="Self.clientes" Multiplicity="0..1" />
+    <End Role="ventas" Type="Self.ventas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="clientes">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ventas">
+        <PropertyRef Name="cliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ventas_ibfk_2">
+    <End Role="productos" Type="Self.productos" Multiplicity="0..1" />
+    <End Role="ventas" Type="Self.ventas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="productos">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ventas">
+        <PropertyRef Name="producto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="sistemaEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="clientes" EntityType="Self.clientes" />
+    <EntitySet Name="configuracion" EntityType="Self.configuracion" />
+    <EntitySet Name="productos" EntityType="Self.productos" />
+    <EntitySet Name="ventas" EntityType="Self.ventas" />
+    <AssociationSet Name="ventas_ibfk_1" Association="Self.ventas_ibfk_1">
+      <End Role="clientes" EntitySet="clientes" />
+      <End Role="ventas" EntitySet="ventas" />
+    </AssociationSet>
+    <AssociationSet Name="ventas_ibfk_2" Association="Self.ventas_ibfk_2">
+      <End Role="productos" EntitySet="productos" />
+      <End Role="ventas" EntitySet="ventas" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
